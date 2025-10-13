@@ -21,6 +21,7 @@ def validate_input(prompt, valid_options):
 def describe_contestants(position, entry):
     return print(f"{position} - {data_game[entry]["name"]}: {data_game[entry]["description"]}, from: {data_game[entry]["country"]}")
 
+
 while contunue_game:
     data_max = len(data_game) - 1
     if len(data_game) < 2:
