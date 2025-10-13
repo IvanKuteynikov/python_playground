@@ -57,6 +57,14 @@ def display_hand(hand_name, hand):
     for i in range(len(split_cards[0])):
         row = "   ".join([card[i] for card in split_cards])
         print(row)
+        
+def validate_input(prompt, valid_options):
+    while True:
+        user_input = input(prompt).lower()
+        if user_input in valid_options:
+            return user_input
+        else:
+            print(f"Please enter: {" or ".join(valid_options)}")
 
 continue_game = True
 number_of_games = 0
@@ -69,13 +77,9 @@ deck = create_deck(5)
 random.shuffle(deck)
     
 while continue_game == True:
-    if len(deck) < 260:
-        while True:
-            reset_deck = input(f"In deck now is: {len(deck)} cards, do you want to reset deck? (Y/N) ").lower()
-            if reset_deck in ('y', 'n'):
-                break
-            else:
-                print("Please enter Y or N")
+    if len(deck) < 200:
+        print(f"In deck now is: {len(deck)} cards")
+        reset_deck = validate_input("Do you want to reset deck? (Y/N) ", ['y','n'])
         if reset_deck == 'y':
             deck = create_deck(5)
             random.shuffle(deck)
@@ -93,7 +97,7 @@ while continue_game == True:
             print(f"You have in total: {player_score}.\n")
             display_hand("Dealer's Hand", [computer[0], (' ', '?')])
             print("="*77)
-            players_decision = input(f"Hit (H) or Stand (S)? ").lower()
+            players_decision = validate_input("Hit (H) or Stand (S)? ", ['h','s'])
             if players_decision == 'h':
                 player.extend(draw_a_card(deck, 1))
                 player_score = calculate_score(extract_value_of_card(player))
@@ -101,8 +105,6 @@ while continue_game == True:
             elif players_decision == 's':
                 print("\n"*30)
                 break
-            else:
-                print("Invalid input. Please enter 'H' or 'S'.")
         if player_score < 21:
             while computer_score <= 16:
                 computer.extend(draw_a_card(deck, 1))
@@ -133,16 +135,12 @@ while continue_game == True:
         print(f"Dealer have in total: {computer_score}.\n")
         print(f"{result}\n")
         print("-"*30)
-        while True:
-            ask_to_continue_game = input("Do you want to continue? (Y/N)? ")
-            if ask_to_continue_game in ['y','n']:
-                break
-            else:
-                print("Please enter Y or N")
-        print("\n"*100)
-        print(logo)
-        print(f"\nCurrent result is:\n# of games played: {number_of_games}\nYou wins count: {player_wins} time(-s)\nDealer wins count: {computer_wins} time(-s)\n")
-        if ask_to_continue_game == 'n':
+        ask_to_continue_game = validate_input("Do you want to continue? (Y/N)? ", ['y','n'])
+        if ask_to_continue_game == 'y':
+            print("\n"*100)
+            print(logo)
+            print(f"\nCurrent result is:\n# of games played: {number_of_games}\nYou wins count: {player_wins} time(-s)\nDealer wins count: {computer_wins} time(-s)\n")
+        elif ask_to_continue_game == 'n':
             final_winner = ""
             if player_wins > computer_wins:
                 final_winner = "You!"
