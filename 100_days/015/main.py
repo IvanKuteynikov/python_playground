@@ -60,6 +60,7 @@ def money_count(cost_of_drink, drink):
 
 
 while continue_to_use_machine:
+    print(logo)
     drinks_to_choose()
     users_choice = validate_user_input("What do you want to drink? ",['1','2','3',"report"])
     while users_choice == 'report':
