@@ -18,6 +18,10 @@ left_paddle = Paddle(LEFT)
 ball = Ball(1)
 score = Scoreboard()
 screen.listen()
+screen.onkey(right_paddle.up, "Up")
+screen.onkey(right_paddle.down, "Down")
+screen.onkey(left_paddle.up, "w")
+screen.onkey(left_paddle.down, "s")
 
 
 def play_game():
@@ -38,10 +42,6 @@ def play_game():
             score.increase_score_left()
             ball.ball_reset()
 
-screen.onkey(right_paddle.up, "Up")
-screen.onkey(right_paddle.down, "Down")
-screen.onkey(left_paddle.up, "w")
-screen.onkey(left_paddle.down, "s")
 screen.onkey(play_game, "space")
-
+play_game()
 screen.exitonclick()
