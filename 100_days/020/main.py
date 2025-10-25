@@ -19,7 +19,6 @@ food = Food()
 score = Scoreboard()
 screen.listen()
 
-
 def play_game():
     score.start_game_display()
     game_is_on = True
@@ -32,12 +31,12 @@ def play_game():
             score.increase_score()
             snake.extend()
         if snake.head.xcor() > 300 or snake.head.xcor() < -300 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-            game_is_on = False
-            score.print_game_over()
+            score.reset_score()
+            snake.reset_snake()
         for part in snake.body[1:]:
             if snake.head.distance(part) < 15:
-                game_is_on = False
-                score.print_game_over()
+                score.reset_score()
+                snake.reset_snake()
 
 screen.onkey(snake.up, "Up")
 screen.onkey(snake.down, "Down")

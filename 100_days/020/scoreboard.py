@@ -3,11 +3,19 @@ from turtle import Turtle
 ALIGNMENT = 'center'
 FONT = ('Courier', 24, 'normal')
 
+with open("high_score.txt", 'r') as file:
+    high_score = file.read()
+    if high_score == '':
+        high_score = 0
+    else:
+        high_score = int(high_score)
+
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.penup()
         self.score = 0
+        self.high_score = high_score
         self.hideturtle()
         self.color('white')
         self.goto(0, 270)
@@ -29,8 +37,16 @@ class Scoreboard(Turtle):
 
     def update_score(self):
         self.clear()
-        self.write(f"Score: {self.score}", align=ALIGNMENT, font=FONT)
+        self.write(f"Score: {self.score} High score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
     def increase_score(self):
         self.score += 1
+        self.update_score()
+
+    def reset_score(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open("high_score.txt", 'w') as data:
+                data.write(str(self.score))
+        self.score = 0
         self.update_score()
