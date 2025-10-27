@@ -14,7 +14,6 @@ def create_letters(filename, names_list):
         starting_letter = f.read()
         for i in range(len(names_list)):
             name_invited = names_list[i]
-            print(f"invited: {name_invited}")
             starting_letters = starting_letter.replace("[name]", f"{name_invited}")
             with open(f"ReadyToSend/letter for {name_invited}.txt", "w") as f:
                 f.write(starting_letters)
