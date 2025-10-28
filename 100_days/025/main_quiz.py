@@ -29,6 +29,8 @@ while game_is_on:
         new_data = pd.DataFrame(missing_states)
         new_data.to_csv('missing_states.csv')
         break
+    if answer_input in all_states and answer_input in states_user_know:
+        continue
     if answer_input in all_states:
         state_data = data[data['state'] == answer_input]
         turtle.penup()
