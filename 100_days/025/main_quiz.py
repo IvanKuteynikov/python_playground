@@ -17,15 +17,13 @@ game_is_on = True
 n = 0
 total = len(data)
 states_user_know = []
-missing_states = []
+
 
 while game_is_on:
     answer_input = screen.textinput(title=f"{n}/{total} guessed States", prompt="What's another state name?: ").title()
     if answer_input == 'Quit':
         game_is_on = False
-        for state in all_states:
-            if state not in states_user_know:
-                missing_states.append(state)
+        missing_states = [state for state in all_states if state not in states_user_know]
         new_data = pd.DataFrame(missing_states)
         new_data.to_csv('missing_states.csv')
         break
