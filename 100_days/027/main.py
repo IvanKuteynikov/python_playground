@@ -12,10 +12,10 @@ my_label.grid(column=0, row=0)
 def calculate():
     if radio_state.get() == 1:
         result = round(float(input.get()) * 1.60934, 2)
-        my_label.config(text=result)
+        my_label.config(text=f"Result is {result}")
     else:
         result = round(float(input.get()) / 1.60934, 2)
-        my_label.config(text=result)
+        my_label.config(text=f"Result is {result}")
 
 def radio_used():
     print(radio_state.get())
